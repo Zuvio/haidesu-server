@@ -14,7 +14,7 @@
     <description>HaiDesu OpenAPI - The OpenAPI Specification</description>
 
     <dependencies>
-<!--        deze twee dependencies waren nodig om openapi te genereren met interfaceOnly=true -->
+        <!--        deze twee dependencies waren nodig om openapi te genereren met interfaceOnly=true -->
         <dependency>
             <groupId>org.openapitools</groupId>
             <artifactId>jackson-databind-nullable</artifactId>
@@ -26,7 +26,7 @@
             <version>2.2.8</version>
         </dependency>
 
-<!--        deze twee dependencies waren nodig om openapi te genereren zonder interfaceOnly -->
+        <!--        deze dependency was nodig om openapi te genereren zonder interfaceOnly -->
         <dependency>
             <groupId>io.swagger.core.v3</groupId>
             <artifactId>swagger-models</artifactId>
@@ -53,8 +53,9 @@
                             <apiPackage>com.haidesu.api</apiPackage>
                             <modelPackage>com.haidesu.model</modelPackage>
                             <configOptions>
-<!--                                deze configOption is noodzakelijk voor springboot3 en nieuwere dep versies-->
+                                <!--                                deze configOption is noodzakelijk voor springboot3 en nieuwere dep versies-->
                                 <useSpringBoot3>true</useSpringBoot3>
+                                <interfaceOnly>true</interfaceOnly>
                             </configOptions>
                         </configuration>
                     </execution>
