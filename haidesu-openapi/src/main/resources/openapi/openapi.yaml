@@ -1,0 +1,54 @@
+openapi: 3.0.3
+info:
+  title: HaiDesu - Image Management API
+  description: The HaiDesu REST API for managing images
+  version: 1.0.0
+servers:
+  - url: http://localhost:8080/api/v1
+tags:
+  - name: image
+    description: Everything about your images
+    externalDocs:
+      description: Find out more
+      url: http://swagger.io
+  - name: user
+    description: Operations about user
+paths:
+  /images/new:
+    post:
+      tags:
+        - image
+      summary: Upload a new image
+      operationId: saveImage
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Image'
+      responses:
+        '201':
+          description: Image uploaded successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Image'
+        '400':
+          description: Bad request. The uploaded file was not an image.
+        '500':
+          description: Internal server error. The image could not be uploaded.
+components:
+  schemas:
+    Image:
+      type: object
+      description: Schema for the Image object
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 10
+        imageUrl:
+          type: string
+        file:
+          type: string
+          format: binary

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>com.haidesu</groupId>
+        <artifactId>haidesu</artifactId>
+        <version>${revision}</version>
+    </parent>
+
+    <artifactId>haidesu-openapi</artifactId>
+    <name>HaiDesu (OpenAPI)</name>
+    <description>HaiDesu OpenAPI - The OpenAPI Specification</description>
+
+    <dependencies>
+<!--        deze twee dependencies waren nodig om openapi te genereren met interfaceOnly=true -->
+        <dependency>
+            <groupId>org.openapitools</groupId>
+            <artifactId>jackson-databind-nullable</artifactId>
+            <version>0.2.6</version>
+        </dependency>
+        <dependency>
+            <groupId>io.swagger.core.v3</groupId>
+            <artifactId>swagger-annotations</artifactId>
+            <version>2.2.8</version>
+        </dependency>
+
+<!--        deze twee dependencies waren nodig om openapi te genereren zonder interfaceOnly -->
+        <dependency>
+            <groupId>io.swagger.core.v3</groupId>
+            <artifactId>swagger-models</artifactId>
+            <version>2.2.8</version>
+        </dependency>
+<!--        zonder interfaceOnly genereert openAPI een spring application die spring-test nodig heeft-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+        </dependency>
+
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.openapitools</groupId>
+                <artifactId>openapi-generator-maven-plugin</artifactId>
+                <version>6.4.0</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                        <configuration>
+                            <inputSpec>${project.basedir}/src/main/resources/openapi/openapi.yaml</inputSpec>
+                            <generatorName>spring</generatorName>
+                            <output>${project.build.directory}/generated-sources</output>
+                            <apiPackage>com.haidesu.api</apiPackage>
+                            <modelPackage>com.haidesu.model</modelPackage>
+                            <configOptions>
+<!--                                deze configOption is noodzakelijk voor springboot3 en nieuwere dep versies-->
+                                <useSpringBoot3>true</useSpringBoot3>
+                            </configOptions>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>
