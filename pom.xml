@@ -18,6 +18,7 @@
     <packaging>pom</packaging>
 
     <modules>
+        <module>haidesu-liquibase</module>
         <module>haidesu-openapi</module>
         <module>haidesu-rest</module>
     </modules>
@@ -46,18 +47,20 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
         </dependency>
+
+<!--        database mysql-->
         <dependency>
             <groupId>com.mysql</groupId>
             <artifactId>mysql-connector-j</artifactId>
             <scope>runtime</scope>
         </dependency>
-<!--        toegevoegd wegens snakeyaml 1.33 kwetsbaarheid in spring-boot-starter-web-->
-        <dependency>
-            <groupId>org.yaml</groupId>
-            <artifactId>snakeyaml</artifactId>
-            <version>2.0</version>
-        </dependency>
 
+<!--        liquibase version control-->
+        <dependency>
+            <groupId>org.liquibase</groupId>
+            <artifactId>liquibase-core</artifactId>
+            <version>4.19.0</version>
+        </dependency>
 
 
         <!--        START: springfox -> kijken om ooit swagger-ui aan de praat te krijgen-->
@@ -76,7 +79,12 @@
             <artifactId>springfox-oas</artifactId>
             <version>${springfox-version}</version>
         </dependency>
-<!--        EIND: springfox -> kijken om ooit swagger-ui aan de praat te krijgen-->
+        <dependency>
+            <groupId>org.springdoc</groupId>
+            <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+            <version>2.0.2</version>
+        </dependency>
+        <!--        EIND: springfox -> kijken om ooit swagger-ui aan de praat te krijgen-->
 
 
     </dependencies>
@@ -85,7 +93,13 @@
         moet je niet in dep-management plaatsen, anders hebben de child modules geen versie
         https://docs.spring.io/spring-boot/docs/3.0.2/maven-plugin/reference/htmlsingle/  -->
     <dependencyManagement>
-
+        <dependencies>
+            <dependency>
+                <groupId>com.haidesu</groupId>
+                <artifactId>haidesu-liquibase</artifactId>
+                <version>${project.parent.version}</version>
+            </dependency>
+        </dependencies>
     </dependencyManagement>
 
 </project>

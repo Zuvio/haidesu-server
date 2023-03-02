@@ -14,6 +14,10 @@
     <description>HaiDesu Rest - Rest API Image Managing App</description>
 
     <dependencies>
+        <dependency>
+            <groupId>com.haidesu</groupId>
+            <artifactId>haidesu-liquibase</artifactId>
+        </dependency>
     </dependencies>
 
 <!--    deze plugin alleen gebruiken in modules die een deployable zijn, dus niet in de parent pom! -->

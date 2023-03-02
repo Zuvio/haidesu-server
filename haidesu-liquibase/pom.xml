@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>com.haidesu</groupId>
+        <artifactId>haidesu</artifactId>
+        <version>${revision}</version>
+    </parent>
+
+    <artifactId>haidesu-liquibase</artifactId>
+    <name>HaiDesu (Liquibase)</name>
+    <description>HaiDesu Liquibase - Create the database for the Image Managing App</description>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.jooq</groupId>
+            <artifactId>jooq</artifactId>
+            <version>3.17.8</version>
+        </dependency>
+    </dependencies>
+
+    <!--    liquibase plugin om liquibase los te kunnen draaien zonder haidesu-rest-->
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.liquibase</groupId>
+                    <artifactId>liquibase-maven-plugin</artifactId>
+                    <version>4.19.0</version>
+                    <configuration>
+                        <propertyFile>liquibase.properties</propertyFile>
+                    </configuration>
+                </plugin>
+
+                <plugin>
+                    <groupId>org.jooq</groupId>
+                    <artifactId>jooq-codegen-maven</artifactId>
+                    <version>3.17.8</version>
+                    <executions>
+                        <execution>
+                            <id>jooq-codegen</id>
+                            <phase>generate-sources</phase>
+                            <goals>
+                                <goal>generate</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                    <configuration>
+                        <jdbc>
+                            <driver>mysql</driver>
+                            <url>localhost:3306/HAIDESU</url>
+                            <user>root</user>
+                            <password>poppop</password>
+                        </jdbc>
+                        <generator>
+                            <target>
+                                <packageName>com.haidesu.model</packageName>
+                                <directory>src/main/java</directory>
+                            </target>
+                        </generator>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
+
+
+</project>
