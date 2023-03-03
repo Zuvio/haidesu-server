@@ -33,6 +33,13 @@
             <version>2.2.8</version>
         </dependency>
 
+<!--        host de swagger-ui.html pagina voor je rest api-->
+        <dependency>
+            <groupId>org.springdoc</groupId>
+            <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+            <version>2.0.2</version>
+        </dependency>
+
     </dependencies>
 
     <build>
