@@ -62,7 +62,9 @@
                             <configOptions>
                                 <!--                                deze configOption is noodzakelijk voor springboot3 en nieuwere dep versies-->
                                 <useSpringBoot3>true</useSpringBoot3>
-                                <interfaceOnly>true</interfaceOnly>
+<!--                                <interfaceOnly>true</interfaceOnly>-->
+                                <delegatePattern>true</delegatePattern>
+                                <serializableModel>true</serializableModel>
                             </configOptions>
                         </configuration>
                     </execution>

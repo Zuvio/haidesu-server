@@ -25,13 +25,23 @@ databaseChangeLog:
                   constraints:
                     nullable: false
               - column:
+                  name: EMAIL
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: SECRETWORD
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
                   name: CREATED_AT
                   type: timestamp
                   defaultValueComputed: 'CURRENT_TIMESTAMP'
                   constraints:
                     nullable: false
 #        - createTable:
-#            tableName: haidesu_users_data
+#            tableName: haidesu_user_data
 #            columns:
 #              - column:
 #                  name: id
@@ -41,7 +51,7 @@ databaseChangeLog:
 #                    primaryKey: true
 #                    nullable: false
 #              - column:
-#                  name: users_id
+#                  name: haidesu_user_id
 #                  type: bigint
 #                  constraints:
 #                    nullable: false

@@ -14,41 +14,204 @@ tags:
   - name: user
     description: Operations about user
 paths:
-  /images/new:
-    post:
+  /users:
+    get:
       tags:
-        - image
-      summary: Upload a new image
-      operationId: saveImage
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Image'
+        - user
+      summary: Retrieve all users
+      operationId: getAllUsers
+      parameters:
+        - $ref: '#/components/parameters/page'
+        - $ref: '#/components/parameters/limit'
       responses:
-        '201':
-          description: Image uploaded successfully
+        200:
+          description: Successfully retrieved all users
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Image'
-        '400':
-          description: Bad request. The uploaded file was not an image.
-        '500':
-          description: Internal server error. The image could not be uploaded.
+                type: array
+                description: Found account objects
+                items:
+                  $ref: '#/components/schemas/User'
+        default:
+          $ref: '#/components/responses/Error'
+    post:
+      tags:
+        - user
+      summary: Add a new user
+      operationId: addNewUser
+      requestBody:
+        required: true
+        description: The user that has to be added
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+      responses:
+        201:
+          description: User added succesfully!
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        400:
+          $ref: '#/components/responses/InvalidInput'
+        500:
+          $ref: '#/components/responses/Error'
+  /users/{userId}:
+    get:
+      tags:
+        - user
+      summary: Retrieve a User by Id
+      operationId: getUserById
+      parameters:
+        - $ref: '#/components/parameters/userId'
+      responses:
+        200:
+          description: A user
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        404:
+          $ref: '#/components/responses/NotFound'
+        default:
+          $ref: '#/components/responses/Error'
+    patch:
+      tags:
+        - user
+      summary: Update the User info
+      operationId: updateUser
+      parameters:
+        - $ref: '#/components/parameters/userId'
+      requestBody:
+        description: Fields to be updated
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateUser'
+        required: true
+      responses:
+        204:
+          description: Updated
+          content: { }
+        404:
+          $ref: '#/components/responses/NotFound'
+        default:
+          $ref: '#/components/responses/Error'
+    delete:
+      tags:
+        - user
+      summary: Delete a User
+      operationId: deleteUserById
+      parameters:
+        - $ref: '#/components/parameters/userId'
+      responses:
+        204:
+          description: Deleted
+          content: { }
+        404:
+          $ref: '#/components/responses/NotFound'
+        default:
+          $ref: '#/components/responses/Error'
 components:
   schemas:
-    Image:
+    Error:
+      required:
+        - code
+        - message
       type: object
-      description: Schema for the Image object
+      properties:
+        code:
+          type: integer
+          format: int32
+        message:
+          type: string
+    User:
+      required:
+        - id
+        - username
+        - password
+        - email
+        - secretword
+      type: object
       properties:
         id:
           type: integer
+          description: Unique user ID
           format: int64
-          example: 10
-        imageUrl:
+        username:
           type: string
-        file:
+          description: Name of the customer
+          example: John
+        password:
           type: string
-          format: binary
+          description: Name of the customer
+          example: 1mP0rt3nt
+        email:
+          type: string
+          description: Email
+          example: chibi@haidesu.com
+        secretword:
+          type: string
+          description: A secretword to a user's password
+          example: First address is?
+    CreateUser:
+      allOf:
+        - $ref: '#/components/schemas/User'
+    UpdateUser:
+      type: object
+      properties:
+        password:
+          nullable: true
+          type: string
+        email:
+          nullable: true
+          type: string
+        secretword:
+          nullable: true
+          type: string
+  responses:
+    Error:
+      description: Error accessing the service consistent with http status code
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    InvalidInput:
+      description: Invalid input
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: Unable to find resource
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  parameters:
+    userId:
+      name: userId
+      in: path
+      description: User ID
+      required: true
+      schema:
+        type: integer
+        format: int64
+    page:
+      name: page
+      in: query
+      description: The number of results page
+      schema:
+        type: integer
+        format: int32
+        default: 0
+    limit:
+      name: limit
+      in: query
+      description: The number of results in a single page
+      schema:
+        type: integer
+        format: int32
+        default: 100

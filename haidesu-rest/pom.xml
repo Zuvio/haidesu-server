@@ -18,6 +18,10 @@
             <groupId>com.haidesu</groupId>
             <artifactId>haidesu-liquibase</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.haidesu</groupId>
+            <artifactId>haidesu-openapi</artifactId>
+        </dependency>
 
 <!--        om actuators te laten zien in swagger-ui moet deze dependency ook in rest aanwezig zijn-->
         <dependency>
