@@ -62,7 +62,7 @@ paths:
     get:
       tags:
         - user
-      summary: Retrieve a User by Id
+      summary: Retrieve a user by Id
       operationId: getUserById
       parameters:
         - $ref: '#/components/parameters/userId'
@@ -80,7 +80,7 @@ paths:
     patch:
       tags:
         - user
-      summary: Update the User info
+      summary: Update the user info
       operationId: updateUser
       parameters:
         - $ref: '#/components/parameters/userId'
@@ -102,7 +102,7 @@ paths:
     delete:
       tags:
         - user
-      summary: Delete a User
+      summary: Delete a user
       operationId: deleteUserById
       parameters:
         - $ref: '#/components/parameters/userId'
