@@ -103,6 +103,11 @@
                 <artifactId>haidesu-openapi</artifactId>
                 <version>${project.parent.version}</version>
             </dependency>
+            <dependency>
+                <groupId>com.haidesu</groupId>
+                <artifactId>haidesu-rest</artifactId>
+                <version>${project.parent.version}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 

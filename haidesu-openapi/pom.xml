@@ -59,6 +59,7 @@
                             <output>${project.build.directory}/generated-sources</output>
                             <apiPackage>com.haidesu.api</apiPackage>
                             <modelPackage>com.haidesu.model</modelPackage>
+                            <modelNameSuffix>Json</modelNameSuffix>
                             <configOptions>
                                 <!--                                deze configOption is noodzakelijk voor springboot3 en nieuwere dep versies-->
                                 <useSpringBoot3>true</useSpringBoot3>
