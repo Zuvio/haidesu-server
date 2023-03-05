@@ -1,18 +1,21 @@
-package com.haidesu.service;
+package com.haidesu.api;
 
-import com.haidesu.api.UsersApiDelegate;
 import com.haidesu.entities.User;
 import com.haidesu.exceptions.UserNotFoundException;
-import com.haidesu.mappers.UserMapper;
+import com.haidesu.mappers.UserMapperImpl;
 import com.haidesu.model.CreateUserJson;
 import com.haidesu.model.UpdateUserJson;
 import com.haidesu.model.UserJson;
+import com.haidesu.service.UserService;
+import com.haidesu.service.UserServiceImpl;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * <p>
@@ -28,13 +31,14 @@ import java.util.List;
  * </p>
  */
 
-@Component
+@Service
 public class UsersApiDelegateImpl implements UsersApiDelegate {
 
     private final UserServiceImpl userService;
-    private final UserMapper userMapper;
+    private final UserMapperImpl userMapper;
 
-    public UsersApiDelegateImpl(UserServiceImpl userService, UserMapper userMapper) {
+    @Autowired
+    public UsersApiDelegateImpl(UserServiceImpl userService, UserMapperImpl userMapper) {
         this.userService = userService;
         this.userMapper = userMapper;
     }
@@ -45,7 +49,7 @@ public class UsersApiDelegateImpl implements UsersApiDelegate {
                 .getContent()
                 .stream()
                 .map(userMapper::toUserJson)
-                .toList();
+                .collect(Collectors.toList());
         return new ResponseEntity<>(userJsonList, HttpStatus.OK);
     }
 

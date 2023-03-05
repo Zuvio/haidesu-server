@@ -150,6 +150,7 @@
                             <modelPackage>com.haidesu.model</modelPackage>
                             <modelNameSuffix>Json</modelNameSuffix>
                             <configOptions>
+                                <basePackage>com.haidesu</basePackage>
                                 <!--                                deze configOption is noodzakelijk voor springboot3 en nieuwere dep versies-->
                                 <useSpringBoot3>true</useSpringBoot3>
                                 <!--                                <interfaceOnly>true</interfaceOnly>-->

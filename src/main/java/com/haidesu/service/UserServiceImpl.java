@@ -9,6 +9,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.OffsetDateTime;
 import java.util.Optional;
 
 @Service
@@ -29,6 +30,7 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional
     public User addNewUser(User user) {
+        user.setCreatedAt(OffsetDateTime.now());
         return userRepository.save(user);
     }
 

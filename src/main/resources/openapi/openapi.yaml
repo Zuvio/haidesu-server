@@ -214,7 +214,7 @@ components:
     page:
       name: page
       in: query
-      description: The number of results page
+      description: The number of the page you want to view (starts at 0)
       schema:
         type: integer
         format: int32
