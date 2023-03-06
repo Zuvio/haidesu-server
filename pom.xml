@@ -22,6 +22,7 @@
 
     <dependencies>
         <!--        START : SPRING-->
+        <!--suppress VulnerableLibrariesLocal -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
@@ -152,9 +153,9 @@
                             <modelNameSuffix>Json</modelNameSuffix>
                             <configOptions>
                                 <basePackage>com.haidesu</basePackage>
-                                <!--                                deze configOption is noodzakelijk voor springboot3 en nieuwere dep versies-->
+                                <!--  deze configOption is noodzakelijk voor springboot3 en nieuwere dep versies-->
                                 <useSpringBoot3>true</useSpringBoot3>
-                                <!--                                <interfaceOnly>true</interfaceOnly>-->
+                                <!--  <interfaceOnly>true</interfaceOnly>-->
                                 <delegatePattern>true</delegatePattern>
                                 <serializableModel>true</serializableModel>
                             </configOptions>

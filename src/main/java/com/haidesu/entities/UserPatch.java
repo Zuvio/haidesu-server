@@ -18,6 +18,7 @@ public class UserPatch {
                 .password(password.orElse(user.getPassword()))
                 .email(email.orElse(user.getEmail()))
                 .secretword(secretword.orElse(user.getSecretword()))
+                .createdAt(user.getCreatedAt())
                 .build();
     }
 
