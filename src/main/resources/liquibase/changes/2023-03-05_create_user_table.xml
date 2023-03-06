@@ -24,6 +24,7 @@
             <column name="CREATED_AT" type="TIMESTAMP" defaultValueComputed="CURRENT_TIMESTAMP">
                 <constraints nullable="false"/>
             </column>
+            <column name="LAST_LOGIN" type="TIMESTAMP" defaultValueComputed="CURRENT_TIMESTAMP"/>
         </createTable>
     </changeSet>
 </databaseChangeLog>

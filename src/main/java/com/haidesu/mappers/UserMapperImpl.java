@@ -16,7 +16,8 @@ public class UserMapperImpl implements UserMapper {
                 .username(entity.getUsername())
                 .password(entity.getPassword())
                 .email(entity.getEmail())
-                .secretword(entity.getSecretword());
+                .secretword(entity.getSecretword())
+                .lastLogin(entity.getLastLogin());
     }
 
     @Override
