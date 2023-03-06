@@ -10,7 +10,7 @@
     </parent>
 
     <groupId>com.haidesu</groupId>
-    <artifactId>haidesu</artifactId>
+    <artifactId>haidesu-server</artifactId>
     <name>HaiDesu</name>
     <description>HaiDesu - An Image Managing App</description>
     <version>0.1.0-SNAPSHOT</version>
