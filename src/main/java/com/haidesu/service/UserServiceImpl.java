@@ -3,6 +3,7 @@ package com.haidesu.service;
 import com.haidesu.entities.User;
 import com.haidesu.entities.UserPatch;
 import com.haidesu.exceptions.UserNotFoundException;
+import com.haidesu.model.UserJson;
 import com.haidesu.repository.UserRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -52,5 +53,10 @@ public class UserServiceImpl implements UserService {
     public void deleteUserById(long id) {
         User user = userRepository.findById(id).orElseThrow(() -> new UserNotFoundException(id));
         userRepository.delete(user);
+    }
+
+    @Override
+    public Optional<User> getUserByEmailAndPassword(UserJson userJson) {
+        return userRepository.findByEmailAndPassword(userJson.getEmail(), userJson.getPassword());
     }
 }

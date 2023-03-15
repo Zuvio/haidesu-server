@@ -76,4 +76,10 @@ public class UsersApiDelegateImpl implements UsersApiDelegate {
         userService.deleteUserById(userId);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
+
+    @Override
+    public ResponseEntity<UserJson> authenticateUserLogin(UserJson userJson) {
+        User user = userService.getUserByEmailAndPassword(userJson).orElseThrow(() -> new UserNotFoundException(userJson.getId()));
+        return new ResponseEntity<>(userMapper.toUserJson(user), HttpStatus.OK);
+    }
 }

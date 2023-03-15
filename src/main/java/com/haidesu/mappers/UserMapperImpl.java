@@ -16,7 +16,6 @@ public class UserMapperImpl implements UserMapper {
                 .username(entity.getUsername())
                 .password(entity.getPassword())
                 .email(entity.getEmail())
-                .secretword(entity.getSecretword())
                 .lastLogin(entity.getLastLogin());
     }
 
@@ -26,7 +25,6 @@ public class UserMapperImpl implements UserMapper {
                 .username(dto.getUsername())
                 .password(dto.getPassword())
                 .email(dto.getEmail())
-                .secretword(dto.getSecretword())
                 .build();
     }
 
@@ -35,7 +33,6 @@ public class UserMapperImpl implements UserMapper {
         return UserPatch.builder()
                 .password(jsonPatch.getPassword())
                 .email(jsonPatch.getEmail())
-                .secretword(jsonPatch.getSecretword())
                 .build();
     }
 }

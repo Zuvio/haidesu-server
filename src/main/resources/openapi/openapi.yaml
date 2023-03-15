@@ -114,6 +114,30 @@ paths:
           $ref: '#/components/responses/NotFound'
         default:
           $ref: '#/components/responses/Error'
+  /users/authenticate:
+    post:
+      tags:
+        - user
+      summary: Authenticate a user on login
+      operationId: authenticateUserLogin
+      requestBody:
+        description: The user that wants to login
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+        required: true
+      responses:
+        200:
+          description: Login successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        401:
+          description: Unauthorized
+        404:
+          $ref: '#/components/responses/NotFound'
 components:
   schemas:
     Error:
@@ -129,18 +153,13 @@ components:
           type: string
     User:
       required:
-        - id
-        - username
         - password
         - email
-        - secretword
       allOf:
         - $ref: '#/components/schemas/UserId'
         - $ref: '#/components/schemas/UserProperties'
         - $ref: '#/components/schemas/UserLastLogin'
     UserId:
-      required:
-        - id
       type: object
       properties:
         id:
@@ -148,10 +167,8 @@ components:
           format: int64
     UserProperties:
       required:
-        - username
         - password
         - email
-        - secretword
       type: object
       properties:
         username:
@@ -167,10 +184,6 @@ components:
           type: string
           description: Email
           example: chibi@haidesu.com
-        secretword:
-          type: string
-          description: A secretword to a user's password
-          example: First address is?
     UserLastLogin:
       type: object
       properties:
@@ -189,9 +202,6 @@ components:
           nullable: true
           type: string
         email:
-          nullable: true
-          type: string
-        secretword:
           nullable: true
           type: string
   responses:

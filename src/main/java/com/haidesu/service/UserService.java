@@ -2,6 +2,7 @@ package com.haidesu.service;
 
 import com.haidesu.entities.User;
 import com.haidesu.entities.UserPatch;
+import com.haidesu.model.UserJson;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -19,4 +20,6 @@ public interface UserService {
     void updateUser(long id, UserPatch userPatch);
 
     void deleteUserById(long id);
+
+    Optional<User> getUserByEmailAndPassword(UserJson user);
 }
