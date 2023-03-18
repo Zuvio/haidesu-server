@@ -79,7 +79,7 @@ public class UsersApiDelegateImpl implements UsersApiDelegate {
 
     @Override
     public ResponseEntity<UserJson> authenticateUserLogin(UserJson userJson) {
-        User user = userService.getUserByEmailAndPassword(userJson).orElseThrow(() -> new UserNotFoundException(userJson.getId()));
+        User user = userService.getUserByEmailAndPassword(userJson).orElseThrow(() -> new UserNotFoundException(userJson.getEmail()));
         return new ResponseEntity<>(userMapper.toUserJson(user), HttpStatus.OK);
     }
 }
