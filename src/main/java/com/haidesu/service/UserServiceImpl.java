@@ -57,6 +57,11 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Optional<User> getUserByEmailAndPassword(UserJson userJson) {
-        return userRepository.findByEmailAndPassword(userJson.getEmail(), userJson.getPassword());
+        Optional<User> user = userRepository.findByEmailAndPassword(userJson.getEmail(), userJson.getPassword());
+        if(user.isPresent()) {
+            user.get().setLastLogin(OffsetDateTime.now());
+            userRepository.save(user.get());
+        }
+        return user;
     }
 }

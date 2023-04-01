@@ -9,7 +9,7 @@ import org.openapitools.jackson.nullable.JsonNullable;
 @Builder
 @AllArgsConstructor
 public class UserPatch {
-    private final JsonNullable<String> password, email, secretword;
+    private final JsonNullable<String> password, email;
 
     public User updateUser(User user) {
         return User.builder()
@@ -20,5 +20,4 @@ public class UserPatch {
                 .createdAt(user.getCreatedAt())
                 .build();
     }
-
 }

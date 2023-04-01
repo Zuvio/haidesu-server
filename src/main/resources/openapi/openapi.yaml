@@ -173,13 +173,13 @@ components:
       properties:
         username:
           type: string
-          description: Name of the customer
+          description: Name
           example: John
         password:
           type: string
           format: password
-          description: Name of the customer
-          example: 1mP0rt3nt
+          description: Password
+          example: asdasd
         email:
           type: string
           description: Email
