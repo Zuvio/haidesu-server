@@ -2,6 +2,7 @@ package com.haidesu.service;
 
 import com.haidesu.entities.User;
 import com.haidesu.entities.UserPatch;
+import com.haidesu.exceptions.UserFieldExistsException;
 import com.haidesu.exceptions.UserNotFoundException;
 import com.haidesu.model.UserJson;
 import com.haidesu.repository.UserRepository;
@@ -31,6 +32,8 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional
     public User addNewUser(User user) {
+        if(userRepository.existsByUsername(user.getUsername())) throw new UserFieldExistsException("Username already taken");
+        if(userRepository.existsByEmail(user.getEmail())) throw new UserFieldExistsException("Email already taken");
         user.setCreatedAt(OffsetDateTime.now());
         return userRepository.save(user);
     }

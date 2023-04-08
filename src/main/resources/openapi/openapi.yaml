@@ -35,29 +35,6 @@ paths:
                   $ref: '#/components/schemas/User'
         default:
           $ref: '#/components/responses/Error'
-    post:
-      tags:
-        - user
-      summary: Add a new user
-      operationId: addNewUser
-      requestBody:
-        required: true
-        description: The user that has to be added
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/CreateUser'
-      responses:
-        201:
-          description: User added succesfully!
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/User'
-        400:
-          $ref: '#/components/responses/InvalidInput'
-        500:
-          $ref: '#/components/responses/Error'
   /users/{userId}:
     get:
       tags:
@@ -138,6 +115,30 @@ paths:
           description: Unauthorized
         404:
           $ref: '#/components/responses/NotFound'
+  /users/register:
+    post:
+      tags:
+        - user
+      summary: Register a new user
+      operationId: registerNewUser
+      requestBody:
+        required: true
+        description: The user that wants to join
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateUser'
+      responses:
+        201:
+          description: User registered succesfully!
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        409:
+          $ref: '#/components/responses/ConflictingData'
+        500:
+          $ref: '#/components/responses/Error'
 components:
   schemas:
     Error:
@@ -212,6 +213,12 @@ components:
           schema:
             $ref: '#/components/schemas/Error'
     InvalidInput:
+      description: Invalid input
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    ConflictingData:
       description: Invalid input
       content:
         application/json:

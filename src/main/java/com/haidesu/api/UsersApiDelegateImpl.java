@@ -54,12 +54,6 @@ public class UsersApiDelegateImpl implements UsersApiDelegate {
     }
 
     @Override
-    public ResponseEntity<UserJson> addNewUser(CreateUserJson userJson) {
-        User user = userService.addNewUser(userMapper.toUserEntity(userJson));
-        return new ResponseEntity<>(userMapper.toUserJson(user), HttpStatus.CREATED);
-    }
-
-    @Override
     public ResponseEntity<UserJson> getUserById(Long userId) {
         User user = userService.getUserById(userId).orElseThrow(() -> new UserNotFoundException(userId));
         return new ResponseEntity<>(userMapper.toUserJson(user), HttpStatus.OK);
@@ -79,7 +73,13 @@ public class UsersApiDelegateImpl implements UsersApiDelegate {
 
     @Override
     public ResponseEntity<UserJson> authenticateUserLogin(UserJson userJson) {
-        User user = userService.getUserByEmailAndPassword(userJson).orElseThrow(() -> new UserNotFoundException(userJson.getEmail()));
+        User user = userService.getUserByEmailAndPassword(userJson).orElseThrow(() -> new UserNotFoundException("Email or password incorrect..."));
         return new ResponseEntity<>(userMapper.toUserJson(user), HttpStatus.OK);
+    }
+
+    @Override
+    public ResponseEntity<UserJson> registerNewUser(CreateUserJson userJson) {
+        User user = userService.addNewUser(userMapper.toUserEntity(userJson));
+        return new ResponseEntity<>(userMapper.toUserJson(user), HttpStatus.CREATED);
     }
 }
